@@ -19,4 +19,55 @@ body
     background-color: #333;
     background-size: 100% 100%;
     image-rendering: pixelated;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.ui .cell.is-lowest-entropy
+{
+    border: 2px solid #00ff00;
+}
+
+.ui .cell.is-last-change
+{
+    border: 2px solid #ff0000;
+}
+
+.ui .cell .content
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 12px;
+    font-family: sans-serif;
+    pointer-events: none;
+    text-shadow: 1px 1px 2px black;
+}
+
+.ui .cell .available-modules
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.5;
+}
+
+.ui .cell .available-module
+{
+    width: 25%;
+    height: 25%;
+    background-size: 100% 100%;
+    image-rendering: pixelated;
 }
