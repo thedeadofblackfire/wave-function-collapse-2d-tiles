@@ -3,7 +3,7 @@
 # TODO
 
 - [x] Solver > Seeded random
-- [x] Solver > Propagate check further than neighbours after collapse
+- [ ] Solver > Propagate check further than neighbours after collapse
 - [x] Solver > Reset
 - [x] Solver > Solve to the end
 - [x] Solver > Events

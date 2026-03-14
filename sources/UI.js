@@ -66,7 +66,14 @@ export default class UI
         // Interactions
         this.$resetButton.addEventListener('click', () =>
         {
+            if (this.progressiveSolve.timeout) {
+                window.clearTimeout(this.progressiveSolve.timeout)
+                this.progressiveSolve.running = false
+            }
             this.solver.reset()
+            for(let i = 0; i < this.cells.length; i++) {
+                this.cells[i].instance = this.solver.grid.cells[i]
+            }
             this.update()
         })
 
@@ -89,7 +96,7 @@ export default class UI
 
         this.$seedInput.addEventListener('input', () =>
         {
-            this.solver.random.str = this.$seedInput.value
+            this.solver.seed = this.$seedInput.value
         })
 
         this.$optionLowestEntropies.addEventListener('change', () => { this.options.lowestEntropies = this.$optionLowestEntropies.checked; this.update() })
