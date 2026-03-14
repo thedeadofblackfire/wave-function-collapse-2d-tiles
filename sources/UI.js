@@ -38,7 +38,14 @@ export default class UI
         // Interactions
         this.$resetButton.addEventListener('click', () =>
         {
+            if (this.progressiveSolve.timeout) {
+                window.clearTimeout(this.progressiveSolve.timeout)
+                this.progressiveSolve.running = false
+            }
             this.solver.reset()
+            for(let i = 0; i < this.cells.length; i++) {
+                this.cells[i].instance = this.solver.grid.cells[i]
+            }
             this.update()
         })
 
@@ -61,7 +68,7 @@ export default class UI
 
         this.$seedInput.addEventListener('input', () =>
         {
-            this.solver.random.str = this.$seedInput.value
+            this.solver.seed = this.$seedInput.value
         })
 
         this.setProgressiveSolve()
@@ -108,6 +115,10 @@ export default class UI
             if(cell.instance.collapsed)
             {
                 cell.$container.style.backgroundImage = `url(${cell.instance.modules[0].data.tileSource})`
+            }
+            else
+            {
+                cell.$container.style.backgroundImage = ''
             }
         }
     }

@@ -4,7 +4,7 @@
 
 - [x] Solver > Seeded random
 - [ ] Solver > Propagate check further than neighbours after collapse
-- [ ] Solver > Reset
+- [x] Solver > Reset
 - [x] Solver > Solve to the end
 - [ ] Solver > Events
 - [ ] Preview > Show lowest entropies

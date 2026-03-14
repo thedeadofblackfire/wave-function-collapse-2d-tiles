@@ -57,7 +57,9 @@ export default class Solver
         this.seed = seed !== null ? seed : this.seed
         
         this.solved = false
-        this.random = new Rand(seed)
-        this.grid = new Grid(this.random, width, height)
+        this.random = new Rand(this.seed)
+        this.grid = new Grid(this.random, this.width, this.height)
+
+        this.setModules(this.modules)
     }
 }
