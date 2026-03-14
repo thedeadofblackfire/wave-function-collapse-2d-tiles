@@ -48,28 +48,51 @@ export default class Cell
             }
         }
 
-        this.neighbours.xNeg?.checkModules('xPos', this.modules)
-        this.neighbours.xPos?.checkModules('xNeg', this.modules)
-        this.neighbours.yNeg?.checkModules('yPos', this.modules)
-        this.neighbours.yPos?.checkModules('yNeg', this.modules)
+        this.propagate()
     }
 
-    checkModules(direction, againstModules)
+    propagate()
     {
-        const filteredModules = []
-        for(const currentModule of this.modules)
-        {
-            for(const againstModule of againstModules)
-            {
-                const oppositeDirections = { xPos: 'xNeg', xNeg: 'xPos', yPos: 'yNeg', yNeg: 'yPos' }
-                const oppositeDirection = oppositeDirections[direction]
-                const isCompatible = currentModule.check(direction, againstModule.sockets[oppositeDirection])
+        const queue = [this]
+        const oppositeDirections = { xPos: 'xNeg', xNeg: 'xPos', yPos: 'yNeg', yNeg: 'yPos' }
 
-                if(isCompatible)
-                    filteredModules.push(currentModule)
+        while(queue.length > 0)
+        {
+            const currentCell = queue.shift()
+
+            for(const direction in currentCell.neighbours)
+            {
+                const neighbour = currentCell.neighbours[direction]
+
+                if(neighbour && !neighbour.collapsed)
+                {
+                    const oppositeDirection = oppositeDirections[direction]
+                    const filteredModules = []
+
+                    for(const neighbourModule of neighbour.modules)
+                    {
+                        let isCompatible = false
+                        for(const currentModule of currentCell.modules)
+                        {
+                            if(neighbourModule.check(oppositeDirection, currentModule.sockets[direction]))
+                            {
+                                isCompatible = true
+                                break
+                            }
+                        }
+
+                        if(isCompatible)
+                            filteredModules.push(neighbourModule)
+                    }
+
+                    if(filteredModules.length < neighbour.modules.length)
+                    {
+                        neighbour.modules = filteredModules
+                        if(!queue.includes(neighbour))
+                            queue.push(neighbour)
+                    }
+                }
             }
         }
-
-        this.modules = filteredModules
     }
 }

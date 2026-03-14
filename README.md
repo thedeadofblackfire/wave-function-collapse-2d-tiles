@@ -3,16 +3,16 @@
 # TODO
 
 - [x] Solver > Seeded random
-- [ ] Solver > Propagate check further than neighbours after collapse
-- [ ] Solver > Reset
+- [x] Solver > Propagate check further than neighbours after collapse
+- [x] Solver > Reset
 - [x] Solver > Solve to the end
-- [ ] Solver > Events
-- [ ] Preview > Show lowest entropies
-- [ ] Preview > Show last change
-- [ ] Preview > Cell > Show entropy
-- [ ] Preview > Cell > Show XY
-- [ ] Preview > Cell > Show available modules
-- [ ] Preview > Choose next collapse manually
+- [x] Solver > Events
+- [x] Preview > Show lowest entropies
+- [x] Preview > Show last change
+- [x] Preview > Cell > Show entropy
+- [x] Preview > Cell > Show XY
+- [x] Preview > Cell > Show available modules
+- [x] Preview > Choose next collapse manually
 - [x] Preview > Auto progress with timer
 
 # Credits

@@ -1,10 +1,11 @@
 import Grid from './Grid.js'
 import Rand from 'rand-seed'
 
-export default class Solver
+export default class Solver extends EventTarget
 {
     constructor(width, height, seed = 'a')
     {
+        super()
         this.width = width
         this.height = height
         this.seed = seed
@@ -30,15 +31,21 @@ export default class Solver
         if(cells === null)
         {
             this.solved = true
+            this.dispatchEvent(new CustomEvent('solved'))
         }
 
         else
         {
-            const cell = cells[Math.floor(this.random.next() * cells.length)] // TODO: Randomize
+            const cell = cells[Math.floor(this.random.next() * cells.length)]
 
             if(cell)
+            {
                 cell.collapse()
+                this.dispatchEvent(new CustomEvent('collapse', { detail: { cell } }))
+            }
         }
+
+        this.dispatchEvent(new CustomEvent('step'))
     }
 
     solve()
@@ -58,6 +65,10 @@ export default class Solver
         
         this.solved = false
         this.random = new Rand(seed)
-        this.grid = new Grid(this.random, width, height)
+        this.grid = new Grid(this.random, this.width, this.height)
+
+        this.setModules(this.modules)
+
+        this.dispatchEvent(new CustomEvent('reset'))
     }
 }
