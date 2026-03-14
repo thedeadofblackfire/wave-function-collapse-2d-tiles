@@ -74,6 +74,7 @@ export default class UI
             for(let i = 0; i < this.cells.length; i++) {
                 this.cells[i].instance = this.solver.grid.cells[i]
             }
+            this.solver.step()
             this.update()
         })
 
@@ -155,6 +156,10 @@ export default class UI
             if(cell.instance.collapsed)
             {
                 cell.$container.style.backgroundImage = `url(${cell.instance.modules[0].data.tileSource})`
+            }
+            else
+            {
+                cell.$container.style.backgroundImage = ''
             }
 
             if(this.options.lowestEntropies && !cell.instance.collapsed && lowestEntropyCells.includes(cell.instance))
